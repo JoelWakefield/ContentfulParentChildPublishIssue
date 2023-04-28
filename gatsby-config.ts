@@ -22,18 +22,10 @@ if (!spaceId || !accessToken) {
 
 const config: GatsbyConfig = {
   plugins: [
-    'gatsby-plugin-tsconfig-paths',
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
     },
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        implementation: sass,
-      },
-    },
-    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-page-creator',
       options: {
@@ -44,50 +36,7 @@ const config: GatsbyConfig = {
         ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        icon: 'src/images/favicon.ico',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-sharp',
-      options: {
-        defaults: {
-          quality: 100,
-          placeholder: 'blurred',
-          breakpoints: [600, 900, 1280],
-        },
-      },
-    },
-    'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: path.join(__dirname, 'src', 'images'),
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'fonts',
-        path: path.join(__dirname, 'src', 'styles', 'fonts'),
-      },
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-prismjs',
-            options: {
-              showLineNumbers: true,
-            },
-          },
-        ],
-      },
-    },
+    'gatsby-plugin-image',
     {
       resolve: 'gatsby-plugin-schema-snapshot',
       options: {
@@ -96,21 +45,6 @@ const config: GatsbyConfig = {
           plugins: ['gatsby-source-npm-package-search'],
         },
         update: false,
-      },
-    },
-    'gatsby-plugin-image',
-    {
-      resolve: 'gatsby-plugin-gatsby-cloud',
-      options: {
-        allPageHeaders: [
-          'Strict-Transport-Security: max-age=63072000; includeSubDomains; preload',
-        ],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-csp-nonce',
-      options: {
-        enableLogs: false,
       },
     },
   ],
