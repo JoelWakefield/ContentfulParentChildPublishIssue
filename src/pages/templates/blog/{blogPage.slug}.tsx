@@ -5,10 +5,17 @@ import {
   Grid,
 } from '@mui/material';
 
-const BlogPage = ({ data: { page: { content: {
-  title,
-  summary,
-}}}}: any) => {
+const BlogPage = ({ data: { 
+  page: { 
+    content: {
+      title,
+      summary,
+      blogText: {
+        text
+      }
+    }
+  },
+}}: any) => {
   return (
     <Container maxWidth="xl">
       <Grid 
@@ -23,6 +30,9 @@ const BlogPage = ({ data: { page: { content: {
         <Grid item xs={12}>
           {summary}
         </Grid>
+        <Grid item xs={12}>
+          {text}
+        </Grid>
       </Grid>
     </Container>
   );
@@ -35,10 +45,24 @@ export const pageQuery = graphql`
     page: contentfulComposePage(slug: {eq: $slug}) {
       content {
         ... on ContentfulBlog {
-          title
-          summary
+          ...Blog
         }
       }
+    }
+  }
+
+  fragment Blog on ContentfulBlog {
+    id
+    contentfulId: contentful_id
+    title
+    summary
+    blogText {
+      contentfulId: contentful_id
+      text
+    }
+    page: compose__page {
+      contentfulId: contentful_id
+      slug
     }
   }
 `;

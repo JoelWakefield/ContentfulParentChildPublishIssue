@@ -10,6 +10,9 @@ import {
 export type BlogCardDefinition = {
   title: string,
   summary: string,
+  blogText: {
+    text: string,
+  },
   page: {
     slug: string
   }[],
@@ -19,12 +22,14 @@ export type BlogCardDefinition = {
 export type BlogCardProps = {
   title: string,
   summary: string,
+  text: string,
   slug: string
 };
 
 const BlogCard = ({
   title,
   summary,
+  text,
   slug,
 }: BlogCardProps) => (
   <Card elevation={2}>
@@ -35,6 +40,10 @@ const BlogCard = ({
 
       <Typography variant="body2">
         {summary}
+      </Typography>
+      
+      <Typography variant="body2">
+        {text}
       </Typography>
     </CardContent>
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { flow, map, slice } from 'lodash/fp';
 
-
 import type { 
   BlogCardDefinition, 
   BlogCardProps 
@@ -26,6 +25,7 @@ const CardHolder = ({ cards }: CardHolderProps) => (
         id,
         title,
         summary,
+        blogText,
         page,
       }: BlogCardDefinition) => (
         <Grid
@@ -38,6 +38,7 @@ const CardHolder = ({ cards }: CardHolderProps) => (
           <BlogCard 
             title={title}
             summary={summary}
+            text={blogText?.text ?? ''}
             slug={`blogs/${page?.[0].slug}`}
           />
         </Grid>

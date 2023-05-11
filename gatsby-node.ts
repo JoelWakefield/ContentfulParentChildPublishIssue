@@ -54,6 +54,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     internalName: String
     title: String
     summary: String
+    blogText: ContentfulBlogText @link(by: "id", from: "blogText___NODE")
     card_holder: [ContentfulCardHolder] @link(by: "id", from: "card holder___NODE") @proxy(from: "card holder___NODE")
     compose__page: [ContentfulComposePage] @link(by: "id", from: "compose: page___NODE") @proxy(from: "compose: page___NODE")
     spaceId: String
@@ -75,4 +76,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
   }
 
   union PageContentTypes = ContentfulBlog | ContentfulCardHolder
+
+  type ContentfulBlogText implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+    contentful_id: String!
+    node_locale: String!
+    text: String
+    blog: [ContentfulBlog] @link(by: "id", from: "blog___NODE")
+    spaceId: String
+    createdAt: Date @dateformat
+    updatedAt: Date @dateformat
+    sys: ContentfulBlogTextSys
+  }
 `);
